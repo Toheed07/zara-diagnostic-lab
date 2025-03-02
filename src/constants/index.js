@@ -1,12 +1,84 @@
 import { facebook, instagram, support, twitter } from "../assets/icons";
 import { bigShoe1, bigShoe2, bigShoe3, customer1, customer2, shoe4, shoe5, shoe6, shoe7, thumbnailShoe1, thumbnailShoe2, thumbnailShoe3 } from "../assets/images";
 import { microscope, heartPulse, report } from "../assets/icons";
+import { lab1, lab2, lab3, lab4, lab5, lab6, lab7, lab8, lab9, lab10, lab11 } from "../assets/images";
 
 export const navLinks = [
     { href: "#home", label: "Home" },
     { href: "#about-us", label: "About Us" },
     { href: "#services", label: "Services" },
     { href: "#contact-us", label: "Contact Us" },
+    { href: "#team", label: "Team" },
+];
+
+
+export const galleryImages = [
+  {
+    src: lab1,
+    title: "Main Laboratory",
+    description: "Our state-of-the-art main laboratory facility",
+    type: "histopathology"
+  },
+  {
+    src: lab2,
+    title: "Testing Area",
+    description: "Advanced testing equipment and workspace",
+    type: "histopathology"
+  },
+  {
+    src: lab3,
+    title: "Sample Processing",
+    description: "Where we process and analyze samples",
+    type: "histopathology"
+  },
+  {
+    src: lab4,
+    title: "Sample Processing",
+    description: "Where we process and analyze samples",
+    type: "histopathology"
+  },
+  {
+    src: lab5,
+    title: "Sample Processing",
+    description: "Where we process and analyze samples",
+    type: "histopathology"
+  },
+  {
+    src: lab6,
+    title: "Sample Processing",
+    description: "Where we process and analyze samples",
+    type: "histopathology"
+  },
+  {
+    src: lab7,
+    title: "Sample Processing",
+    description: "Where we process and analyze samples",
+    type: "histopathology"
+  },
+  {
+    src: lab8,
+    title: "Sample Processing",
+    description: "Where we process and analyze samples",
+    type: "histopathology"
+  },
+  {
+    src: lab9,
+    title: "Sample Processing",
+    description: "Where we process and analyze samples",
+    type: "histopathology"
+  },
+  {
+    src: lab10,
+    title: "Sample Processing",
+    description: "Where we process and analyze samples",
+    type: "histopathology"
+  },
+  {
+    src: lab11,
+    title: "Sample Processing",
+    description: "Where we process and analyze samples",
+    type: "histopathology"
+  }
 ];
 
 export const productServices = [
@@ -193,7 +265,52 @@ export const footerLinks = [
 ];
 
 export const socialMedia = [
-    { src: facebook, alt: "facebook logo" },
-    { src: twitter, alt: "twitter logo" },
-    { src: instagram, alt: "instagram logo" },
+    { src: facebook, alt: "facebook logo", link: "https://www.facebook.com/p/ZARA-Diagnostic-LAB-100064129746022/" },
+    { src: twitter, alt: "twitter logo", link: "https://x.com/zaradiagnosticlab" },
+    { src: instagram, alt: "instagram logo", link: "https://www.instagram.com/zaradiagnosticlab/" },
+];
+
+export const teamMembers = [
+  {
+    id: "member-1",
+    image: "/path-to-image.jpg", // Add your team member images
+    name: "Dr. Sarah Johnson",
+    title: "Chief Pathologist",
+    description: "Specializing in clinical pathology with over 15 years of experience in diagnostic medicine."
+  },
+  {
+    id: "member-2",
+    image: "/path-to-image.jpg",
+    name: "Dr. Michael Chen",
+    title: "Laboratory Director",
+    description: "Expert in laboratory management and quality control with extensive research background."
+  },
+  {
+    id: "member-3",
+    image: "/path-to-image.jpg",
+    name: "Dr. Emily Rodriguez",
+    title: "Senior Pathologist",
+    description: "Specialized in molecular diagnostics and genetic testing with 10+ years experience."
+  },
+  {
+    id: "member-4",
+    image: "/path-to-image.jpg",
+    name: "Dr. James Wilson",
+    title: "Clinical Consultant",
+    description: "Board-certified pathologist specializing in hematopathology and clinical consultation."
+  },
+  {
+    id: "member-5",
+    image: "/path-to-image.jpg",
+    name: "Dr. Lisa Thompson",
+    title: "Quality Manager",
+    description: "Ensures highest standards of laboratory operations and regulatory compliance."
+  },
+  {
+    id: "member-6",
+    image: "/path-to-image.jpg",
+    name: "Dr. Robert Kim",
+    title: "Technical Supervisor",
+    description: "Oversees technical operations and implementation of new diagnostic technologies."
+  }
 ];

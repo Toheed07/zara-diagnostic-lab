@@ -82,7 +82,7 @@ const ServiceModal = ({ service, onClose }) => (
         <div className="flex gap-4 pt-6">
           <button
             onClick={() => {
-              window.open('https://calendly.com/strangeelbakyan-justzeus', '_blank');
+              window.open('https://calendly.com/zaradiagnosticlab', '_blank');
               onClose();
             }}
             className="flex-1 bg-coral-red text-white px-6 py-3 rounded-full
@@ -111,10 +111,10 @@ const DiagnosticServiceCard = ({ title, description, icon, features }) => {
       <motion.div 
         whileHover={{ y: -5, scale: 1.02 }}
         transition={{ duration: 0.3 }}
-        className='flex-1 sm:w-[350px] sm:min-w-[350px] w-full rounded-[20px] shadow-3xl px-10 py-16
+        className='flex-1 sm:w-[350px] sm:min-w-[350px] w-full rounded-[20px] shadow-3xl mx-1 px-10 py-16
           bg-white hover:shadow-2xl transition-shadow cursor-pointer'
       >
-        <div className="flex items-center gap-4">
+        <div className="flex items-center">
           <span className="text-4xl">{icon}</span>
           <h3 className="text-2xl font-bold font-palanquin group-hover:text-coral-red 
             transition-colors">{title}</h3>

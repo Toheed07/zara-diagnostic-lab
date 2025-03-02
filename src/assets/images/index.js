@@ -1,6 +1,7 @@
 import bigShoe1 from './big-shoe1.png'
 import bigShoe2 from './big-shoe2.png'
 import bigShoe3 from './big-shoe3.png'
+import microscope from './microscope.png'
 
 import customer1 from './customer1.jpeg'
 import customer2 from './customer2.svg'
@@ -21,11 +22,23 @@ import thumbnailShoe1 from './thumbnail-shoe1.svg'
 import thumbnailShoe2 from './thumbnail-shoe2.svg'
 import thumbnailShoe3 from './thumbnail-shoe3.svg'
 
+import lab1 from './lab1.png'
+import lab2 from './lab2.png'
+import lab3 from './lab3.png'
+import lab4 from './lab4.png'
+import lab5 from './lab5.png'
+import lab6 from './lab6.png'
+import lab7 from './lab7.png'
+import lab8 from './lab8.png'
+import lab9 from './lab9.png'
+import lab10 from './lab10.png'
+import lab11 from './lab11.png'
+
 export {
     bigShoe1,
     bigShoe2,
     bigShoe3,
-
+    microscope,
     customer1,
     customer2,
 
@@ -42,5 +55,17 @@ export {
     thumbnailBackground,
     thumbnailShoe1,
     thumbnailShoe2,
-    thumbnailShoe3
+    thumbnailShoe3,
+
+    lab1,
+    lab2,
+    lab3,
+    lab4,
+    lab5,
+    lab6,
+    lab7,
+    lab8,
+    lab9,
+    lab10,
+    lab11,
 }

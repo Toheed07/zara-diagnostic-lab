@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "../utils/motion";
 import { Button } from "../components";
 import { arrowRight } from "../assets/icons";
+import { client } from '../lib/sanity';
 
 const HealthPackage = ({ title, price, features }) => (
   <motion.div 
@@ -22,31 +24,55 @@ const HealthPackage = ({ title, price, features }) => (
 );
 
 const SpecialOffer = () => {
-  const packages = [
-    {
-      title: "Basic Health Screening",
-      price: "₹999",
-      features: [
-        "Complete Blood Count",
-        "Blood Sugar Test",
-        "Lipid Profile",
-        "Liver Function Test",
-        "Free Doctor Consultation"
-      ]
-    },
-    {
-      title: "Comprehensive Package",
-      price: "₹2499",
-      features: [
-        "All Basic Package Tests",
-        "Thyroid Profile",
-        "Vitamin D & B12",
-        "Kidney Function Test",
-        "ECG",
-        "Priority Processing"
-      ]
-    }
-  ];
+  const [loading, setLoading] = useState(true);
+  const [sectionData, setSectionData] = useState(null);
+  const [packages, setPackages] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch section configuration
+        const sectionConfig = await client.fetch(`
+          *[_type == "specialOfferSection"][0] {
+            heading,
+            highlightedText,
+            description,
+            benefits,
+            promotionalBanner,
+            buttons
+          }
+        `);
+
+        // Fetch packages
+        const packagesData = await client.fetch(`
+          *[_type == "healthPackage" && isActive == true] | order(order asc) {
+            title,
+            price,
+            features,
+            isPopular
+          }
+        `);
+
+        setSectionData(sectionConfig);
+        setPackages(packagesData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div className="min-h-[400px] flex items-center justify-center">Loading...</div>;
+  }
+
+  const handleLearnMore = () => {
+    const targetId = sectionData?.buttons?.learnMoreTarget || 'services';
+    document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section className='flex justify-between items-center max-xl:flex-col gap-10 max-container py-20'>
@@ -55,42 +81,40 @@ const SpecialOffer = () => {
         className='flex flex-1 flex-col'
       >
         <h2 className='text-4xl font-palanquin font-bold'>
-          <span className='text-coral-red'>Special </span>
-          Health Packages
+          <span className='text-coral-red'>{sectionData?.highlightedText || 'Special'} </span>
+          {sectionData?.heading || 'Health Packages'}
         </h2>
         <p className='mt-4 info-text'>
-          Take charge of your health with our comprehensive screening packages. 
-          Early detection is key to better health outcomes.
+          {sectionData?.description || 
+            'Take charge of your health with our comprehensive screening packages. Early detection is key to better health outcomes.'}
         </p>
         <p className='mt-6 info-text'>
           Book your health package today and receive:
           <ul className="mt-4 space-y-2">
-            <li className="flex items-center gap-2">
-              <span className="text-coral-red">•</span>
-              Free home sample collection
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-coral-red">•</span>
-              Digital reports within 24 hours
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-coral-red">•</span>
-              Complimentary doctor consultation
-            </li>
+            {(sectionData?.benefits || [
+              'Free home sample collection',
+              'Digital reports within 24 hours',
+              'Complimentary doctor consultation'
+            ]).map((benefit, index) => (
+              <li key={index} className="flex items-center gap-2">
+                <span className="text-coral-red">•</span>
+                {benefit}
+              </li>
+            ))}
           </ul>
         </p>
         <div className='mt-11 flex flex-wrap gap-4'>
           <Button 
             label='Book Now' 
             iconURL={arrowRight}
-            onClick={() => window.open('https://calendly.com/strangeelbakyan-justzeus', '_blank')}
+            onClick={() => window.open(sectionData?.buttons?.bookingUrl || 'https://calendly.com/zaradiagnosticlab', '_blank')}
           />
           <Button
             label='Learn more'
             backgroundColor='bg-white'
             borderColor='border-slate-gray'
             textColor='text-slate-gray'
-            onClick={() => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })}
+            onClick={handleLearnMore}
           />
         </div>
       </motion.div>
@@ -106,15 +130,21 @@ const SpecialOffer = () => {
         </div>
 
         {/* Promotional Banner */}
-        <div className="bg-coral-red/10 p-6 rounded-2xl">
-          <div className="flex items-center gap-4">
-            <span className="text-4xl">🎉</span>
-            <div>
-              <h4 className="text-xl font-bold text-coral-red">Special Discount</h4>
-              <p className="text-slate-gray">20% off for senior citizens and family packages</p>
+        {sectionData?.promotionalBanner && (
+          <div className="bg-coral-red/10 p-6 rounded-2xl">
+            <div className="flex items-center gap-4">
+              <span className="text-4xl">{sectionData.promotionalBanner.emoji}</span>
+              <div>
+                <h4 className="text-xl font-bold text-coral-red">
+                  {sectionData.promotionalBanner.title}
+                </h4>
+                <p className="text-slate-gray">
+                  {sectionData.promotionalBanner.description}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </motion.div>
     </section>
   );

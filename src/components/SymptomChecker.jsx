@@ -89,7 +89,7 @@ const SymptomChecker = ({ isOpen, onClose }) => {
   };
 
   const handleBookNow = () => {
-    window.open('https://calendly.com/strangeelbakyan-justzeus', '_blank');
+    window.open('https://calendly.com/zaradiagnosticlab', '_blank');
     onClose();
   };
 
